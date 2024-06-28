@@ -1,9 +1,22 @@
 import { baseApi } from "../../api/baseApi";
 
+interface IProductArg {
+  name: string;
+  value: string | number;
+}
+
 export const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProducts: builder.query({
-      query: () => ({ url: "/products", method: "GET" }),
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: IProductArg) => {
+            params.append(item.name, String(item.value));
+          });
+        }
+        return { url: "/products", method: "GET", params };
+      },
     }),
   }),
 });
