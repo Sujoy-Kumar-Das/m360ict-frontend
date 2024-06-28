@@ -10,3 +10,8 @@ export type TRoute = {
   path: string;
   element: ReactNode;
 };
+
+export type TSiderItem = {
+  key: string;
+  label: ReactNode;
+};

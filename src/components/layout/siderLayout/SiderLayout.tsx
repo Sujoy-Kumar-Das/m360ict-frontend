@@ -1,14 +1,10 @@
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
+import { mainRoutePaths } from "../../../routes/main.routes.paths";
+import generateSiderPaths from "../../../utils/generate.sider.paths";
 
 export default function SiderLayout() {
-  const items = [
-    { path: "/products", title: "Products", id: 1 },
-    { path: "/products/:id", title: "Products", id: 1 },
-  ].map((item, index) => ({
-    key: item.id,
-    label: item.title,
-  }));
+  const items = generateSiderPaths(mainRoutePaths);
   return (
     <Sider
       breakpoint="lg"
