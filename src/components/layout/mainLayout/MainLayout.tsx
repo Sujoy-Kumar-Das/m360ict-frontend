@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import SiderLayout from "../siderLayout/SiderLayout";
-const { Header, Content, Footer, Sider } = Layout;
+const { Content } = Layout;
 
 export default function MainLayout() {
   return (
