@@ -3,6 +3,7 @@ import type { PaginationProps, TableColumnsType } from "antd";
 import { Button, Pagination, Table } from "antd";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import Loader from "../../components/ui/shared/loader/Loader";
 import { productApi } from "../../redux/features/product/product.api";
 
 interface DataType {
@@ -23,7 +24,7 @@ const Products = () => {
 
   // all products redux hooks
   const { useGetAllProductsQuery } = productApi;
-  const { data } = useGetAllProductsQuery(params);
+  const { data, isLoading } = useGetAllProductsQuery(params);
 
   useEffect(() => {
     setParams([
@@ -94,6 +95,10 @@ const Products = () => {
     console.log({ id });
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div style={{ marginBottom: 16 }}>
       <Button type="primary" style={{ marginBottom: "10px" }}>
@@ -108,7 +113,6 @@ const Products = () => {
       <div
         style={{ marginTop: "30px", display: "flex", justifyContent: "end" }}
       >
-        {" "}
         <Pagination
           current={current}
           onChange={onChange}
