@@ -1,31 +1,24 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-type TUserInfo = {
-  email: string | null;
-  name: string | null;
+type TUser = {
+  name: string;
+  email: string;
 };
 
-type TInitialState = {
-  user: TUserInfo | null;
+type TAuthInitialState = {
+  user: null | TUser;
 };
-
-const initialState: TInitialState = {
-  user: {
-    email: "john.doe@x.dummyjson.com",
-    name: "abc vai",
-  },
+const initialState: TAuthInitialState = {
+  user: null,
 };
 
 const authSlice = createSlice({
-  initialState,
   name: "auth",
+  initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<{ user: TUserInfo }>) => {
-      const { email, name } = action.payload.user;
-      if (state.user) {
-        state.user.email = email;
-        state.user.name = name;
-      }
+    setUser: (state, action) => {
+      const { user } = action.payload;
+      state.user = user;
     },
     logOut: (state) => {
       state.user = null;

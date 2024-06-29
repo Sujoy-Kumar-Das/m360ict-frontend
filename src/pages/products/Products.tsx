@@ -7,7 +7,6 @@ import { toast } from "sonner";
 import EditProductModal from "../../components/ui/editProduct/editModal/EditProductModal";
 import Loader from "../../components/ui/shared/loader/Loader";
 import { productApi } from "../../redux/features/product/product.api";
-import { IProduct } from "../../types";
 
 interface DataType {
   key: React.Key;
@@ -104,7 +103,7 @@ const Products = () => {
       toast.error("Failed To Delete Product");
     }
   };
-  const handleEdit = (text: string | undefined, record: IProduct) => {
+  const handleEdit = (_text: string | undefined, record: DataType) => {
     setEditModal(true);
     setEditModalData(record);
   };

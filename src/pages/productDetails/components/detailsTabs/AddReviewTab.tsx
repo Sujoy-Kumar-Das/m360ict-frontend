@@ -1,18 +1,17 @@
 import { Button, Form, Input, Rate } from "antd";
-import { FormInstance } from "antd/lib/form";
 import { useState } from "react";
 import { toast } from "sonner";
 import { productApi } from "../../../../redux/features/product/product.api";
 import { useAppSelector } from "../../../../redux/redux.hooks";
-import { IProduct } from "../../../../types";
+import { IProduct, IReview } from "../../../../types";
 
 export default function AddReviewTab({ data }: { data: IProduct }) {
   // Destructure the data to find the review
   const { reviews, id, ...rest } = data;
 
-  const [form] = Form.useForm<FormInstance>();
+  const [form] = Form.useForm();
 
-  const [reviewData, setReviewData] = useState([...reviews]);
+  const [reviewData, setReviewData] = useState<IReview[]>([...reviews]);
 
   // redux hook for get the user info
   const { user } = useAppSelector((state) => state.auth);
@@ -20,20 +19,20 @@ export default function AddReviewTab({ data }: { data: IProduct }) {
   // redux hook for update the review
   const [updateProduct] = productApi.useUpdateProductDataMutation();
 
-  const handleAddReview = async (values) => {
+  const handleAddReview = async (values: IReview) => {
     // Create the new review
     const newReview = {
       ...values,
       reviewerName: user!.name,
       reviewerEmail: user!.email,
-      date: new Date(),
+      date: new Date().toString(),
     };
 
     // Create a new array with the new review
     const updatedReviews = [...reviewData, newReview];
 
     // Update reviewData state
-    setReviewData(updatedReviews);
+    setReviewData(updatedReviews as IReview[]);
 
     // Create data for the product update
     const newData = { ...rest, reviews: updatedReviews };

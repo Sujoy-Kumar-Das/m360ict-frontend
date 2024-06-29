@@ -1,4 +1,4 @@
-import { Button, Form, FormInstance, Input } from "antd";
+import { Button, Divider, Form, Input, Typography } from "antd";
 
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -6,8 +6,9 @@ import { userAuth } from "../../firebase/firebase.auth";
 import { setUser } from "../../redux/features/auth/auth.reducer";
 import { useAppDispatch } from "../../redux/redux.hooks";
 
+const { Title, Paragraph } = Typography;
 export default function Login() {
-  const [form] = Form.useForm<FormInstance>();
+  const [form] = Form.useForm();
 
   const navigate = useNavigate();
   //   redux hooks
@@ -75,7 +76,7 @@ export default function Login() {
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Submit Review
+            Login
           </Button>
         </Form.Item>
       </Form>
@@ -85,6 +86,12 @@ export default function Login() {
           <Link to={"/auth/create-account"}>Create Now</Link>
         </Button>
       </p>
+      <Divider />
+      <div>
+        <Title level={3}>Credentials</Title>
+        <Paragraph strong>Email: sujoykumardas@gmail.com</Paragraph>
+        <Paragraph strong>Password: 11111111</Paragraph>
+      </div>
     </div>
   );
 }

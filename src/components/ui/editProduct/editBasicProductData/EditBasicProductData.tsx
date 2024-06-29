@@ -1,10 +1,9 @@
-import { UploadOutlined } from "@ant-design/icons";
-import { Button, Col, Form, Input, Row, Select, Upload } from "antd";
+import { Button, Col, Form, Input, Row, Select } from "antd";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { toast } from "sonner";
 import { categoryApi } from "../../../../redux/features/category/category.api";
 import { productApi } from "../../../../redux/features/product/product.api";
-import { uploadImageApi } from "../../../../redux/features/uploadImage/uploadImage.api";
+
 import { IProduct } from "../../../../types";
 import { IBasicInfoFieldsValues } from "../../../../types/product/IUpdateProduct";
 
@@ -13,7 +12,7 @@ interface IEditProductBasicInfo {
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function EditBasicDataTab({
+export default function EditBasicProductData({
   data,
   setOpen,
 }: IEditProductBasicInfo) {
@@ -26,9 +25,6 @@ export default function EditBasicDataTab({
   //   update data hook
   const { useUpdateProductDataMutation } = productApi;
   const [updateProductData, { isLoading }] = useUpdateProductDataMutation();
-
-  const { useUploadImageMutation } = uploadImageApi;
-  const [uploadImage] = useUploadImageMutation();
 
   // destructure product
   const {
@@ -44,7 +40,6 @@ export default function EditBasicDataTab({
     sku,
     weight,
     availabilityStatus,
-    thumbnail,
     minimumOrderQuantity,
     returnPolicy,
     shippingInformation,
@@ -65,7 +60,6 @@ export default function EditBasicDataTab({
     sku,
     weight,
     availabilityStatus,
-    thumbnail,
     minimumOrderQuantity,
     returnPolicy,
     shippingInformation,
@@ -173,13 +167,6 @@ export default function EditBasicDataTab({
         <Col md={8} sm={12}>
           <Form.Item label="Availability Status" name="availabilityStatus">
             <Input placeholder="Enter availability status" />
-          </Form.Item>
-        </Col>
-        <Col md={8} sm={12}>
-          <Form.Item label="Thumbnail" name="thumbnail">
-            <Upload>
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
-            </Upload>
           </Form.Item>
         </Col>
         {/*  */}

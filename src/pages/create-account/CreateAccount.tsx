@@ -1,4 +1,4 @@
-import { Button, Form, FormInstance, Input } from "antd";
+import { Button, Form, Input } from "antd";
 
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -13,7 +13,7 @@ interface ICreateUser {
 }
 
 export default function CreateAccount() {
-  const [form] = Form.useForm<FormInstance>();
+  const [form] = Form.useForm();
   const navigate = useNavigate();
   //   redux hooks
   const dispatch = useAppDispatch();
