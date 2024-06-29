@@ -3,6 +3,7 @@ import type { PaginationProps, TableColumnsType } from "antd";
 import { Button, Pagination, Table } from "antd";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import EditProductModal from "../../components/ui/editProduct/editModal/EditProductModal";
 import Loader from "../../components/ui/shared/loader/Loader";
 import { productApi } from "../../redux/features/product/product.api";
 
@@ -16,6 +17,9 @@ interface DataType {
 
 const Products = () => {
   // react hooks
+  const [editModal, setEditModal] = useState(false);
+  const [editModalData, setEditModalData] = useState({});
+
   const [current, setCurrent] = useState(1);
   const [params, setParams] = useState([
     { name: "limit", value: 10 },
@@ -70,9 +74,9 @@ const Products = () => {
     },
     {
       title: "Edit",
-      dataIndex: "id",
-      render: (id) => (
-        <Button onClick={() => handleEdit(id)} type="primary">
+      dataIndex: "",
+      render: (text, record, index) => (
+        <Button onClick={() => handleEdit(text, record)} type="primary">
           <EditFilled />
         </Button>
       ),
@@ -91,8 +95,9 @@ const Products = () => {
   const handleDelete = (id) => {
     console.log({ id });
   };
-  const handleEdit = (id) => {
-    console.log({ id });
+  const handleEdit = (text, record) => {
+    setEditModal(true);
+    setEditModalData(record);
   };
 
   if (isLoading) {
@@ -120,6 +125,11 @@ const Products = () => {
           showSizeChanger={false}
         />
       </div>
+      <EditProductModal
+        data={editModalData}
+        open={editModal}
+        setOpen={setEditModal}
+      />
     </div>
   );
 };

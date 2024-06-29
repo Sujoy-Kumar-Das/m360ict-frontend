@@ -1,26 +1,31 @@
-import { Button, Modal } from "antd";
-import { useState } from "react";
+import { Modal } from "antd";
+import React, { ReactNode, SetStateAction } from "react";
 
-export default function CustomModal() {
-  const [open, setOpen] = useState(false);
+interface ICustomModal {
+  open: boolean;
+  setOpen: React.Dispatch<SetStateAction<boolean>>;
+  children: ReactNode;
+  title: string;
+  width: string | number;
+}
 
+export default function CustomModal({
+  children,
+  open,
+  setOpen,
+  title,
+  width,
+}: ICustomModal) {
   return (
-    <>
-      <Button type="primary" onClick={() => setOpen(true)}>
-        Open Modal of 1000px width
-      </Button>
-      <Modal
-        title="Modal 1000px width"
-        centered
-        open={open}
-        onOk={() => setOpen(false)}
-        onCancel={() => setOpen(false)}
-        width={1000}
-      >
-        <p>some contents...</p>
-        <p>some contents...</p>
-        <p>some contents...</p>
-      </Modal>
-    </>
+    <Modal
+      title={title}
+      centered
+      open={open}
+      onOk={() => setOpen(false)}
+      onCancel={() => setOpen(false)}
+      width={width}
+    >
+      {children}
+    </Modal>
   );
 }
