@@ -29,5 +29,12 @@ export const productApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["product"],
     }),
+    deleteProductData: builder.mutation({
+      query: ({ id }) => {
+        console.log(id);
+        return { url: `/products/${id}`, method: "DELETE" };
+      },
+      invalidatesTags: ["product"],
+    }),
   }),
 });

@@ -3,6 +3,7 @@ import type { PaginationProps, TableColumnsType } from "antd";
 import { Button, Pagination, Table } from "antd";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { toast } from "sonner";
 import EditProductModal from "../../components/ui/editProduct/editModal/EditProductModal";
 import Loader from "../../components/ui/shared/loader/Loader";
 import { productApi } from "../../redux/features/product/product.api";
@@ -28,8 +29,10 @@ const Products = () => {
   ]);
 
   // all products redux hooks
-  const { useGetAllProductsQuery } = productApi;
+  const { useGetAllProductsQuery, useDeleteProductDataMutation } = productApi;
   const { data, isLoading } = useGetAllProductsQuery(params);
+
+  const [deleteProduct] = useDeleteProductDataMutation();
 
   useEffect(() => {
     setParams([
@@ -76,7 +79,7 @@ const Products = () => {
     {
       title: "Edit",
       dataIndex: "",
-      render: (text, record, index) => (
+      render: (text, record) => (
         <Button onClick={() => handleEdit(text, record)} type="primary">
           <EditFilled />
         </Button>
@@ -93,10 +96,15 @@ const Products = () => {
     },
   ];
 
-  const handleDelete = (id: number) => {
-    console.log({ id });
+  const handleDelete = async (id: number) => {
+    const res = await deleteProduct({ id }).unwrap();
+    if (res.id) {
+      toast.success("Product Deleted Successfully");
+    } else {
+      toast.error("Failed To Delete Product");
+    }
   };
-  const handleEdit = (record: IProduct) => {
+  const handleEdit = (text: string | undefined, record: IProduct) => {
     setEditModal(true);
     setEditModalData(record);
   };
