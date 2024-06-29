@@ -1,30 +1,37 @@
-# React + TypeScript + Vite
+# M360ICT Job Task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Important links
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Live Link](https://668047e6ca7a2b78479621f1--dulcet-ganache-bc3f10.netlify.app/auth/login)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Authentication system implemented users can create their account and log in with email and password.
+- Private routing system implemented user must log in to access the dashboard.
+- Dashboard:- users can delete, update, and view product details.
+- User can create, delete, and edit a review.
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Technology and Libraries
+
+- React
+- React Router Dom
+- Ant Design
+- Swiper JS
+
+
+
+### How to use
+
+1. Clone the repository:
+
+   ```
+   git clone https://github.com/yourusername/myapp.git](https://github.com/Sujoy-Kumar-Das/m360ict-frontend
+
+
+1. Install all npm pakages:
+
+   ```
+    npm i
