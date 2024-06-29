@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import EditProductModal from "../../components/ui/editProduct/editModal/EditProductModal";
 import Loader from "../../components/ui/shared/loader/Loader";
 import { productApi } from "../../redux/features/product/product.api";
+import { IProduct } from "../../types";
 
 interface DataType {
   key: React.Key;
@@ -92,10 +93,10 @@ const Products = () => {
     },
   ];
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     console.log({ id });
   };
-  const handleEdit = (text, record) => {
+  const handleEdit = (record: IProduct) => {
     setEditModal(true);
     setEditModalData(record);
   };

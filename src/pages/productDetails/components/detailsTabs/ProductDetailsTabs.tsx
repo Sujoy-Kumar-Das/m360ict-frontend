@@ -20,7 +20,7 @@ const ProductDetailsTabs = ({ data }: { data: IProduct }) => {
     {
       key: "3",
       label: "Add Review",
-      children: <AddReviewTab />,
+      children: <AddReviewTab data={data} />,
     },
   ];
 

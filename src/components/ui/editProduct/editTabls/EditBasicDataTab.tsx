@@ -1,17 +1,22 @@
-import { Button, Col, Form, Input, Row, Select } from "antd";
-import { useEffect } from "react";
+import { UploadOutlined } from "@ant-design/icons";
+import { Button, Col, Form, Input, Row, Select, Upload } from "antd";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { toast } from "sonner";
 import { categoryApi } from "../../../../redux/features/category/category.api";
 import { productApi } from "../../../../redux/features/product/product.api";
+import { uploadImageApi } from "../../../../redux/features/uploadImage/uploadImage.api";
 import { IProduct } from "../../../../types";
 import { IBasicInfoFieldsValues } from "../../../../types/product/IUpdateProduct";
+
+interface IEditProductBasicInfo {
+  data: IProduct;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
 
 export default function EditBasicDataTab({
   data,
   setOpen,
-}: {
-  data: IProduct;
-}) {
+}: IEditProductBasicInfo) {
   const [form] = Form.useForm();
 
   //   get all categories
@@ -21,6 +26,9 @@ export default function EditBasicDataTab({
   //   update data hook
   const { useUpdateProductDataMutation } = productApi;
   const [updateProductData, { isLoading }] = useUpdateProductDataMutation();
+
+  const { useUploadImageMutation } = uploadImageApi;
+  const [uploadImage] = useUploadImageMutation();
 
   // destructure product
   const {
@@ -83,6 +91,7 @@ export default function EditBasicDataTab({
       label: category.name,
     })
   );
+
   return (
     <Form
       form={form}
@@ -126,6 +135,11 @@ export default function EditBasicDataTab({
           </Form.Item>
         </Col>
         <Col md={8} sm={12}>
+          <Form.Item label="Discount Percentage" name="discountPercentage">
+            <Input placeholder="Enter Discount" />
+          </Form.Item>
+        </Col>
+        <Col md={8} sm={12}>
           <Form.Item
             label="Stock"
             name="stock"
@@ -161,6 +175,40 @@ export default function EditBasicDataTab({
             <Input placeholder="Enter availability status" />
           </Form.Item>
         </Col>
+        <Col md={8} sm={12}>
+          <Form.Item label="Thumbnail" name="thumbnail">
+            <Upload>
+              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            </Upload>
+          </Form.Item>
+        </Col>
+        {/*  */}
+        <Col md={8} sm={12}>
+          <Form.Item label="Availability Status" name="availabilityStatus">
+            <Input placeholder="Enter availability status" />
+          </Form.Item>
+        </Col>
+        <Col md={8} sm={12}>
+          <Form.Item label="Minimum Order Quantity" name="minimumOrderQuantity">
+            <Input placeholder="Enter Minimum Order Quantity" />
+          </Form.Item>
+        </Col>
+        <Col md={8} sm={12}>
+          <Form.Item label="Return Policy" name="returnPolicy">
+            <Input placeholder="Enter Return Policy" />
+          </Form.Item>
+        </Col>{" "}
+        <Col md={8} sm={12}>
+          <Form.Item label="Shipping Information" name="shippingInformation">
+            <Input placeholder="Enter Shipping Information" />
+          </Form.Item>
+        </Col>{" "}
+        <Col md={8} sm={12}>
+          <Form.Item label="Warranty Information" name="warrantyInformation">
+            <Input placeholder="Enter Warranty Information" />
+          </Form.Item>
+        </Col>
+        {/*  */}
         <Col span={24}>
           <Form.Item
             label="Description"

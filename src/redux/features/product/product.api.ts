@@ -27,6 +27,7 @@ export const productApi = baseApi.injectEndpoints({
       query: ({ id, data }) => {
         return { url: `/products/${id}`, method: "PATCH", body: data };
       },
+      invalidatesTags: ["product"],
     }),
   }),
 });
