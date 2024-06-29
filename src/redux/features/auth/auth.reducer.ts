@@ -11,7 +11,7 @@ type TInitialState = {
 
 const initialState: TInitialState = {
   user: {
-    email: "abc@gmail.com",
+    email: "john.doe@x.dummyjson.com",
     name: "abc vai",
   },
 };
